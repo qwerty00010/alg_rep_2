@@ -1,4 +1,6 @@
 def vigenere_cipher(tekst, klucz):
+    if klucz is None or klucz == "":
+        raise ValueError("Błędny klucz")
     zaszyfrowany_tekst = ""
     key_index = 0
 
