@@ -1,40 +1,58 @@
-def vigenere_cipher(tekst, klucz):
+
+def vigenere_cipher(tekst, klucz, mode='encrypt'):
+    """
+    Główna funkcja szyfrująca/deszyfrująca.
+    mode='encrypt' -> szyfruje
+    mode='decrypt' -> deszyfruje
+    """
     zaszyfrowany_tekst = ""
     key_index = 0
-
-    # Upewniamy się, że klucz i tekst są wielkimi literami dla uproszczenia
     tekst = tekst.upper()
     klucz = klucz.upper()
 
     for litera in tekst:
-        if litera.isalpha():  # Szyfrujemy tylko litery
-            # 1. Uzyskaj wartość liczbową litery tekstu (zakres 0-25)
+        if litera.isalpha():
             tekst_val = ord(litera) - ord('A')
-
-            # 2. Uzyskaj wartość liczbową litery klucza (używając modulo dla zawijania klucza)
             klucz_litera = klucz[key_index % len(klucz)]
             klucz_val = ord(klucz_litera) - ord('A')
 
-            # 3. Oblicz zaszyfrowaną literę (dodaj przesunięcie i zastosuj modulo 26)
-            zaszyfrowana_val = (tekst_val + klucz_val) % 26
+            if mode == 'encrypt':
+                wynik_val = (tekst_val + klucz_val) % 26
+            else:  # mode == 'decrypt'
+                wynik_val = (tekst_val - klucz_val + 26) % 26
 
-            # 4. Zamień wynik z powrotem na znak
-            zaszyfrowany_tekst += chr(zaszyfrowana_val + ord('A'))
-
-            # 5. Zwiększ indeks klucza tylko po zaszyfrowaniu litery
+            zaszyfrowany_tekst += chr(wynik_val + ord('A'))
             key_index += 1
         else:
-            # Jeśli znak nie jest literą (np. spacja), dodaj go bez zmian
             zaszyfrowany_tekst += litera
-
     return zaszyfrowany_tekst
 
 
-# Przykład użycia:
-tekst_do_szyfrowania = "PROGRAMOWANIE"
-moj_klucz = "KOD"
-wynik = vigenere_cipher(tekst_do_szyfrowania, moj_klucz)
+def reverse_text(text):
+    """Odwraca tekst - dodatkowa operacja na danych"""
+    return text[::-1]
 
-print(f"Tekst: {tekst_do_szyfrowania}")
-print(f"Klucz: {moj_klucz}")
-print(f"Wynik: {wynik}")
+
+def main():
+    print("--- ZMODYFIKOWANY SZYFR VIGENÈRE'A ---")
+
+    # Dane wejściowe
+    tekst_do_szyfrowania = "PROGRAMOWANIE"
+    moj_klucz = "KOD"
+
+    # 1. Wywołanie szyfrowania
+    wynik = vigenere_cipher(tekst_do_szyfrowania, moj_klucz, mode='encrypt')
+    print(f"Tekst: {tekst_do_szyfrowania}")
+    print(f"Klucz: {moj_klucz}")
+    print(f"Wynik szyfrowania: {wynik}")
+
+    # 2. Wywołanie deszyfrowania (Twoja poprawka funkcjonalności)
+    oryginal = vigenere_cipher(wynik, moj_klucz, mode='decrypt')
+    print(f"Wynik deszyfrowania: {oryginal}")
+    
+    odwrocony = reverse_text(wynik)
+    print(f"Wynik odwrócony: {odwrocone}")
+
+
+if __name__ == "__main__":
+    main()
