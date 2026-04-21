@@ -1,10 +1,10 @@
+import secrets
+import string
+import time
+
+
 
 def vigenere_cipher(tekst, klucz, mode='encrypt'):
-    """
-    Główna funkcja szyfrująca/deszyfrująca.
-    mode='encrypt' -> szyfruje
-    mode='decrypt' -> deszyfruje
-    """
     zaszyfrowany_tekst = ""
     key_index = 0
     tekst = tekst.upper()
@@ -28,30 +28,44 @@ def vigenere_cipher(tekst, klucz, mode='encrypt'):
     return zaszyfrowany_tekst
 
 
+def generate_key(length):
+    letters = string.ascii_uppercase
+    return ''.join(secrets.choice(letters) for _ in range(length))
+
+
 def reverse_text(text):
-    """Odwraca tekst - dodatkowa operacja na danych"""
     return text[::-1]
+
 
 
 def main():
     print("--- ZMODYFIKOWANY SZYFR VIGENÈRE'A ---")
 
-    # Dane wejściowe
     tekst_do_szyfrowania = "PROGRAMOWANIE"
-    moj_klucz = "KOD"
 
-    # 1. Wywołanie szyfrowania
+
+    moj_klucz = generate_key(5)
+    print(f"Wygenerowany losowy klucz: {moj_klucz}")
+
+
+    start_time = time.time()
+
     wynik = vigenere_cipher(tekst_do_szyfrowania, moj_klucz, mode='encrypt')
-    print(f"Tekst: {tekst_do_szyfrowania}")
-    print(f"Klucz: {moj_klucz}")
-    print(f"Wynik szyfrowania: {wynik}")
 
-    # 2. Wywołanie deszyfrowania (Twoja poprawka funkcjonalności)
+    end_time = time.time()
+    czas_trwania = end_time - start_time
+
+    print(f"Tekst: {tekst_do_szyfrowania}")
+    print(f"Wynik szyfrowania: {wynik}")
+    print(f"Czas szyfrowania: {czas_trwania:.6f} sekund")
+
+
     oryginal = vigenere_cipher(wynik, moj_klucz, mode='decrypt')
     print(f"Wynik deszyfrowania: {oryginal}")
-    
-    odwrocony = reverse_text(wynik)
-    print(f"Wynik odwrócony: {odwrocone}")
+
+
+    odwrocony_wynik = reverse_text(wynik)
+    print(f"Wynik odwrócony: {odwrocony_wynik}")
 
 
 if __name__ == "__main__":
