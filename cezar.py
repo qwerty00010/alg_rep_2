@@ -1,48 +1,59 @@
-import sys
+import time
+import random
 
 
-# 1. Funkcja szyfrująca (Logika)
-def encrypt_caesar(text, shift):
-    result = ""
-    for char in text:
-        if char.isupper():
-            result += chr((ord(char) + shift - 65) % 26 + 65)
-        elif char.islower():
-            result += chr((ord(char) + shift - 97) % 26 + 97)
+def cezar(napis, klucz):
+
+    if not isinstance(napis, str) or not isinstance(klucz, int):
+        raise TypeError("zły typ danych")
+
+    wynik = ""
+    for litera in napis:
+        if litera.isupper():
+            wynik += chr((ord(litera) + klucz - 65) % 26 + 65)
+        elif litera.islower():
+            wynik += chr((ord(litera) + klucz - 97) % 26 + 97)
         else:
-            result += char
-    return result
+            wynik += litera
+    return wynik
 
 
-# 2. Funkcja deszyfrująca (Wymagana dodatkowa funkcjonalność)
+
 def decrypt_caesar(text, shift):
-    return encrypt_caesar(text, -shift)
+    return cezar(text, -shift)
 
 
-# 3. Funkcja odwracająca (Druga dodatkowa funkcjonalność)
 def reverse_text(text):
     return text[::-1]
 
 
-# 4. Główna część programu
 def main():
-    print("--- SZYFR CEZARA (GAŁĄŹ: CEZAR-KOD) ---")
-    print("1. Szyfruj")
+    print("--- SZYFR CEZARA (GAŁĄŹ: POPRAWA_CEZARA) ---")
+    print("1. Szyfruj (z pomiarem czasu i losowym kluczem)")
     print("2. Deszyfruj")
     print("3. Odwróć tekst")
 
     choice = input("Wybierz opcję (1/2/3): ")
 
-    if choice in ['1', '2']:
+    if choice == '1':
+        text = input("Podaj tekst do zaszyfrowania: ")
+        klucz_losowy = random.randint(1, 25)  # Wymagany generator klucza
+
+        start_time = time.time()  # Wymagany pomiar czasu
+        zaszyfrowany = cezar(text, klucz_losowy)
+        end_time = time.time()
+
+        print(f"\nWynik: {zaszyfrowany}")
+        print(f"Użyty losowy klucz: {klucz_losowy}")
+        print(f"Czas szyfrowania: {end_time - start_time:.6f} sekund")
+
+    elif choice == '2':
         text = input("Podaj tekst: ")
         try:
-            shift = int(input("Podaj przesunięcie: "))
-            if choice == '1':
-                print("Wynik:", encrypt_caesar(text, shift))
-            else:
-                print("Wynik:", decrypt_caesar(text, shift))
+            shift = int(input("Podaj klucz do deszyfracji: "))
+            print("Wynik:", decrypt_caesar(text, shift))
         except ValueError:
-            print("Błąd: Przesunięcie musi być liczbą!")
+            print("Błąd: Klucz musi być liczbą!")
 
     elif choice == '3':
         text = input("Podaj tekst do odwrócenia: ")
