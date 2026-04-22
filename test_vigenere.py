@@ -71,3 +71,36 @@ def test_vigenere_decrypt_ids(zaszyfrowany, klucz, expected):
     assert vigenere_decrypt(zaszyfrowany, klucz) == expected
 
 
+# ------------------------------------
+# ------- TESTY pytest.fixture -------
+# ------------------------------------
+
+@pytest.fixture
+def klucz_testowy():
+    return "SECRET"
+
+
+# 2. Łączymy parametryzację z fixture
+@pytest.mark.parametrize("tekst, expected", [
+    # Przypadek 1: Znaki specjalne i spacje
+    ("HELLO WORLD!", "ZILCS AFICT!"),
+
+    # Przypadek 2: Pytajniki i inne symbole
+    ("CZY DZIALA?", "UDR VRETPT?"),
+
+    # Przypadek 3: Same znaki specjalne (powinny zostać bez zmian)
+    ("123 !?#", "123 !?#"),
+], ids=[
+    "spacja_i_wykrzyknik", "pytajnik", "znaki_specjalne"
+])
+
+
+def test_vigenere_with_fixtures(tekst, expected, klucz_testowy):
+    """
+    Test sprawdza szyfrowanie Vigenere'a używając:
+    - tekst: z parametryzacji
+    - expected: z parametryzacji
+    - klucz_testowy: z fixture
+    """
+    wynik = vigenere_cipher(tekst, klucz_testowy)
+    assert wynik == expected
