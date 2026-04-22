@@ -1,20 +1,21 @@
 from vigener import vigenere_cipher, vigenere_decrypt
 import pytest
 
+@pytest.mark.basic
 def test_vinegre_basic():
     tekst = "PYTHON"
     klucz = "A"
     zaszyfrowany_tekst = vigenere_cipher(tekst, klucz)
     assert zaszyfrowany_tekst == "PYTHON"
 
-
+@pytest.mark.basic
 def test_dl_klucza():
     tekst = "ABCDE"
     klucz = "AB"
     zaszyfrowany_tekst = vigenere_cipher(tekst, klucz)
     assert zaszyfrowany_tekst == "ACCEE"
 
-
+@pytest.mark.exceptions
 def test_raise_error():
     tekst = "ABCDE"
     klucz = None
@@ -39,7 +40,7 @@ def test_raise_error():
 
 
 # --- ZINTEGROWANE TESTY SZYFROWANIA (Osoba A i B) ---
-@pytest.mark.parametrize.exeptions("tekst, klucz, expected", [
+@pytest.mark.parametrize("tekst, klucz, expected", [
     # Dane z pierwszej listy
     ("AAA", "BCD", "BCD"),
     ("XYZ", "B", "YZA"),
@@ -55,18 +56,20 @@ def test_raise_error():
     "male_litery", "spacje_i_mieszane", "standardowe_szyfrowanie", "zawijanie_alfabetu"
 ])
 
+@pytest.mark.basic
 def test_vigenere_encrypt_ids(tekst, klucz, expected):
     assert vigenere_cipher(tekst, klucz) == expected
 
 
 # --- TESTY ODSZYFROWYWANIA ---
-@pytest.mark.parametrize.extended("zaszyfrowany, klucz, expected", [
+@pytest.mark.parametrize("zaszyfrowany, klucz, expected", [
     ("PZVHPP", "ABC", "PYTHON"),
     ("BCD", "BCD", "AAA"),
 ], ids=[
     "odszyfrowanie_standard", "odszyfrowanie_to_samo"
 ])
 
+@pytest.mark.basic
 def test_vigenere_decrypt_ids(zaszyfrowany, klucz, expected):
     assert vigenere_decrypt(zaszyfrowany, klucz) == expected
 
@@ -75,18 +78,18 @@ def test_vigenere_decrypt_ids(zaszyfrowany, klucz, expected):
 # ------- TESTY pytest.fixture -------
 # ------------------------------------
 
-@pytest.fixture.basic
+@pytest.fixture
 def klucz_testowy():
     return "SECRET"
 
 
 # 2. Łączymy parametryzację z fixture
-@pytest.mark.parametrize.basik("tekst, expected", [
+@pytest.mark.parametrize("tekst, expected", [
     # Przypadek 1: Znaki specjalne i spacje
-    ("HELLO WORLD!", "ZILCS AFICT!"),
+    ("HELLO WORLD!", "ZINCS PGVNU!"),
 
     # Przypadek 2: Pytajniki i inne symbole
-    ("CZY DZIALA?", "UDR VRETPT?"),
+    ("CZY DZIALA?", "UDA UDBSPC?"),
 
     # Przypadek 3: Same znaki specjalne (powinny zostać bez zmian)
     ("123 !?#", "123 !?#"),
@@ -94,7 +97,7 @@ def klucz_testowy():
     "spacja_i_wykrzyknik", "pytajnik", "znaki_specjalne"
 ])
 
-
+@pytest.mark.basic
 def test_vigenere_with_fixtures(tekst, expected, klucz_testowy):
     """
     Test sprawdza szyfrowanie Vigenere'a używając:
