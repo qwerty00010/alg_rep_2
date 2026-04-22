@@ -39,7 +39,7 @@ def test_raise_error():
 
 
 # --- ZINTEGROWANE TESTY SZYFROWANIA (Osoba A i B) ---
-@pytest.mark.parametrize("tekst, klucz, expected", [
+@pytest.mark.parametrize.exeptions("tekst, klucz, expected", [
     # Dane z pierwszej listy
     ("AAA", "BCD", "BCD"),
     ("XYZ", "B", "YZA"),
@@ -60,7 +60,7 @@ def test_vigenere_encrypt_ids(tekst, klucz, expected):
 
 
 # --- TESTY ODSZYFROWYWANIA ---
-@pytest.mark.parametrize("zaszyfrowany, klucz, expected", [
+@pytest.mark.parametrize.extended("zaszyfrowany, klucz, expected", [
     ("PZVHPP", "ABC", "PYTHON"),
     ("BCD", "BCD", "AAA"),
 ], ids=[
@@ -75,13 +75,13 @@ def test_vigenere_decrypt_ids(zaszyfrowany, klucz, expected):
 # ------- TESTY pytest.fixture -------
 # ------------------------------------
 
-@pytest.fixture
+@pytest.fixture.basic
 def klucz_testowy():
     return "SECRET"
 
 
 # 2. Łączymy parametryzację z fixture
-@pytest.mark.parametrize("tekst, expected", [
+@pytest.mark.parametrize.basik("tekst, expected", [
     # Przypadek 1: Znaki specjalne i spacje
     ("HELLO WORLD!", "ZILCS AFICT!"),
 
