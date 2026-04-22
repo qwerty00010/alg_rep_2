@@ -1,4 +1,4 @@
-from vigener import vigenere_cipher
+from vigener import vigenere_cipher, vigenere_decrypt
 import pytest
 
 def test_vinegre_basic():
@@ -36,4 +36,38 @@ def test_raise_error():
     # Ten assert zawiedzie (rzuci błąd), jeśli w kodzie jest % 25
     # Bo funkcja zwróci "A" zamiast oczekiwanego "Z"
     #assert wynik == "Z", f"Błąd! Oczekiwano 'Z', a otrzymano '{wynik}'. Prawdopodobnie złe modulo!"
+
+
+# --- ZINTEGROWANE TESTY SZYFROWANIA (Osoba A i B) ---
+@pytest.mark.parametrize("tekst, klucz, expected", [
+    # Dane z pierwszej listy
+    ("AAA", "BCD", "BCD"),
+    ("XYZ", "B", "YZA"),
+    ("", "KLUCZ", ""),
+    ("ABC", "A", "ABC"),
+    ("hello", "key", "RIJVS"),
+    ("Hello World", "abc", "HFNLP YOSND"),
+    # Dane z drugiej listy
+    ("PYTHON", "ABC", "PZVHPP"),
+    ("ZZZ", "B", "AAA"),
+], ids=[
+    "przesuniecie_BCD", "koniec_alfabetu", "pusty_napis", "zero_shift",
+    "male_litery", "spacje_i_mieszane", "standardowe_szyfrowanie", "zawijanie_alfabetu"
+])
+
+def test_vigenere_encrypt_ids(tekst, klucz, expected):
+    assert vigenere_cipher(tekst, klucz) == expected
+
+
+# --- TESTY ODSZYFROWYWANIA ---
+@pytest.mark.parametrize("zaszyfrowany, klucz, expected", [
+    ("PZVHPP", "ABC", "PYTHON"),
+    ("BCD", "BCD", "AAA"),
+], ids=[
+    "odszyfrowanie_standard", "odszyfrowanie_to_samo"
+])
+
+def test_vigenere_decrypt_ids(zaszyfrowany, klucz, expected):
+    assert vigenere_decrypt(zaszyfrowany, klucz) == expected
+
 

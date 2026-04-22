@@ -32,6 +32,25 @@ def vigenere_cipher(tekst, klucz):
     return zaszyfrowany_tekst
 
 
+def vigenere_decrypt(tekst, klucz):
+    tekst = tekst.upper()
+    klucz = klucz.upper()
+    wynik = ""
+    key_index = 0
+
+    for litera in tekst:
+        if litera.isalpha():
+            t_val = ord(litera) - ord('A')
+            k_val = ord(klucz[key_index % len(klucz)]) - ord('A')
+
+            # Kluczowa zmiana: (t - k) zamiast (t + k)
+            oryginalna_val = (t_val - k_val) % 26
+            wynik += chr(oryginalna_val + ord('A'))
+            key_index += 1
+        else:
+            wynik += litera
+    return wynik
+
 # Przykład użycia:
 tekst_do_szyfrowania = "PROGRAMOWANIE"
 moj_klucz = "KOD"
