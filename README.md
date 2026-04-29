@@ -11,7 +11,7 @@ Program zawiera:
 4.  Próba łamanie zaszyfrowanych wiadomości
 ### Instalacja
 
-[Klonowanie repozytorium] (https://github.com/qwerty00010/alg_rep_2/)
+[Klonowanie repozytorium](https://github.com/qwerty00010/alg_rep_2/)
 
 
 
