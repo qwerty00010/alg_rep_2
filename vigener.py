@@ -5,6 +5,27 @@ import time
 
 
 def vigenere_cipher(tekst, klucz, mode='encrypt'):
+    """
+        Szyfruje tekst jawny za pomocą algorytmu Vigenère'a.
+
+        Funkcja iteruje przez każdy znak tekstu wejściowego. Jeśli znak jest literą,
+        zostaje on przesunięty o wartość odpowiadającą aktualnej literze klucza
+        (alfabet A-Z jako 0-25). Znaki niebędące literami są pomijane w procesie
+        szyfrowania, ale zachowywane w wynikowym ciągu.
+
+        Args:
+            tekst (str): Ciąg znaków do zaszyfrowania.
+            klucz (str): Słowo kluczowe używane jako klucz szyfrujący.
+                         Nie może być pustym ciągiem.
+
+        Returns:
+            str: Zaszyfrowana wiadomość składająca się z wielkich liter
+                 i zachowanych znaków specjalnych/spacji.
+
+        Raises:
+            ValueError: Jeśli klucz jest pusty (None lub "").
+        """
+
     zaszyfrowany_tekst = ""
     key_index = 0
     tekst = tekst.upper()
@@ -26,6 +47,8 @@ def vigenere_cipher(tekst, klucz, mode='encrypt'):
         else:
             zaszyfrowany_tekst += litera
     return zaszyfrowany_tekst
+
+
 
 
 def generate_key(length):
