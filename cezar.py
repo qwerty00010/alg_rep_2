@@ -1,5 +1,19 @@
 import sys
+def cezar(napis, klucz):
+    """
+    Szyfruje tekst za pomocą szyfru Cezara.
 
+    Args:
+        napis: tekst do zaszyfrowania
+        klucz: liczba przesunięcia
+
+    Returns:
+        Zaszyfrowany tekst
+
+    Raises:
+        TypeError: jeśli zły format danych
+    """
+    # ... tutaj dalej Twój kod funkcji ...
 
 # 1. Funkcja szyfrująca (Logika)
 def encrypt_caesar(text, shift):
