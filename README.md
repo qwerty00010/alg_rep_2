@@ -17,7 +17,7 @@ git clone https://github.com/qwerty00010/alg_rep_2/
 cd alg_rep_2
 ```
 ### Uruchomenie
-![python](https://commons.wikimedia.org/wiki/File:Python-logo.png)
+![python](https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Python-logo.png/960px-Python-logo.png?_=20240316152045)
 ```md
 python main.py
 ```
