@@ -22,6 +22,7 @@ cd alg_rep_2
  ```md
 python main.py
 ```
+#### Struktura 
 
 
 
