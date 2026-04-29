@@ -10,9 +10,9 @@ Program zawiera:
 3.  Generowanie losowych kluczy
 4.  Próba łamanie zaszyfrowanych wiadomości
 ### Instalacja
-```md
+
 [Klonowanie repozytorium] (https://github.com/qwerty00010/alg_rep_2/)
-```
+
 
 
 
