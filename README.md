@@ -16,7 +16,11 @@ Program zawiera:
 git clone https://github.com/qwerty00010/alg_rep_2/
 cd alg_rep_2
 ```
-
+### Uruchomenie
+![python](https://commons.wikimedia.org/wiki/File:Python-logo.png)
+```md
+python main.py
+```
 
 
 
