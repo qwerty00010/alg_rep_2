@@ -12,7 +12,7 @@ Program zawiera:
 ### Instalacja
 ```md
 [Klonowanie repozytorium](https://github.com/qwerty00010/alg_rep_2/)
-
+```
 
 
 
