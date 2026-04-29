@@ -1,4 +1,4 @@
-###Projekt Kryptograficzny
+### Projekt Kryptograficzny
 Program zawiera:
 - Szyfr Cezara
    - Szyfr Cezara to prosty szyfr w , którym każdą literę tekstu zastępuje się literą przesuniętą o stałą liczbe pozycji w alfabecie.
